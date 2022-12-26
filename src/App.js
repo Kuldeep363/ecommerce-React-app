@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from "./components/header/Header";
+import { createContext, lazy, Suspense, useContext, useReducer } from "react";
+import "./styles.css";
+import reducer from "./store/reducer";
+const Home = lazy(()=>import("./pages/Home"));
+const Category = lazy(()=>import("./pages/Category"));
+const Search = lazy(()=> import("./pages/Search"));
+const ProductDetails = lazy(()=> import("./components/products/productDetails"));
 
-function App() {
+let CartContext = createContext();
+
+export default function App() {
+
+  let cart = JSON.parse(localStorage.getItem('cart'))
+  if(!cart){
+    cart = []
+  }
+  const [state, dispatch] = useReducer(reducer,{cart:cart.cart})
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <CartContext.Provider value={{state, dispatch}}>
+        <BrowserRouter>
+        <Header />
+        <Suspense fallback={null}>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/category/:category" element={<Category/>}/>
+                <Route path="/search" element={<Search/>}/>
+                <Route path="/product/:id/:title" element={<ProductDetails/>}/>
+            </Routes>
+        </Suspense>
+        </BrowserRouter>
+      </CartContext.Provider>
     </div>
   );
 }
 
-export default App;
+export const CartState = ()=>{
+  return useContext(CartContext);
+}
