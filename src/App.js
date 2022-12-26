@@ -15,8 +15,10 @@ export default function App() {
   let cart = JSON.parse(localStorage.getItem('cart'))
   if(!cart){
     cart = []
+  }else{
+    cart = cart.cart
   }
-  const [state, dispatch] = useReducer(reducer,{cart:cart.cart})
+  const [state, dispatch] = useReducer(reducer,{cart:cart})
   
   return (
     <div>
