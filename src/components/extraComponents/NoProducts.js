@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import NoProductsImg from '../../assets/images/no-product-found.png'
+import NoProductsImg from '../../assets/images/no-product-found.webp'
 
 const NoProducts = ({searchPage=true}) => {
   return (

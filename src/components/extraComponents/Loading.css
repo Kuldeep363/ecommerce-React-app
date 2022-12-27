@@ -3,6 +3,12 @@
     grid-template-columns: auto ;
     gap: 20px;
     padding: 10px;
+    z-index: -1;
+    position: relative;
+}
+#product__details__loading{
+    z-index: -1;
+    position: relative;
 }
 @media (min-width: 554px) {
     #loading {

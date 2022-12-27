@@ -1,5 +1,8 @@
+import NavigateBeforeRoundedIcon from '@mui/icons-material/NavigateBeforeRounded';
+import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 import { lazy, Suspense, useEffect, useState } from "react";
 import Loading from "../extraComponents/Loading";
+import ScrollToTop from '../extraComponents/ScrollToTop';
 const NoProducts = lazy(()=> import("../extraComponents/NoProducts"))      ;
 const Product  = lazy(()=>import('./product'))
 
@@ -29,11 +32,12 @@ const ProductListing = () => {
 // console.log(products)
   useEffect(()=>{
     fetchProducts();
+    window.scrollTo(0,0)
   },[page])
 
   return (
-    <div>
-      <h2>Recommended products</h2>
+    <div id='product__listing' className='padding'>
+      <h3>Recommended products</h3>
       {
         loading?
         <Loading/> 
@@ -41,7 +45,7 @@ const ProductListing = () => {
         <Suspense fallback={null}>
           {
             products.length>0 ?
-              <div className='product__listing padding'>
+              <div className='product__listing'>
                   {
                     products.map((product)=>{
                       return (
@@ -72,10 +76,10 @@ const ProductListing = () => {
         </div>
         <div className="pagination__tabs">
           <div onClick={()=>handlePageChange(page-1)} className={`pagination__btns ${page>1?'':'pagination__btns__disabled'}`}>
-            <span role='img' aria-label='btn'>⬅️</span>
+            <NavigateBeforeRoundedIcon/>
           </div>
           <div onClick={()=>handlePageChange(page+1)} className={`pagination__btns ${page<totalPages?'':'pagination__btns__disabled'}`}>
-            <span role='img' aria-label='btn'>️➡️</span>
+            <NavigateNextRoundedIcon/>
           </div>
         </div>
       </div>

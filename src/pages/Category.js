@@ -23,7 +23,7 @@ const Category = () => {
     },[category])
   return (
     <Suspense>
-      <div className='mt padding'>
+      <div id='product__listing' className='mt padding'>
         <h3>{category}</h3>
         {
           loading?

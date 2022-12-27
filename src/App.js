@@ -1,8 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/header/Header";
+import ScrollToTop from "./components/extraComponents/ScrollToTop";
 import { createContext, lazy, Suspense, useContext, useReducer } from "react";
 import "./styles.css";
 import reducer from "./store/reducer";
+import Login from "./pages/Login";
 const Home = lazy(()=>import("./pages/Home"));
 const Category = lazy(()=>import("./pages/Category"));
 const Search = lazy(()=> import("./pages/Search"));
@@ -12,25 +14,38 @@ let CartContext = createContext();
 
 export default function App() {
 
-  let cart = JSON.parse(localStorage.getItem('cart'))
-  if(!cart){
-    cart = []
+  let data = JSON.parse(localStorage.getItem('data'))
+  if(!data){
+    data = {
+      "user":null,
+      "cart" :{
+        'products':[],
+        'totalPrice':0
+      }
+    }
   }else{
-    cart = cart.cart
+    data = {
+      "user":data.user,
+      "cart" :data.cart
+    }
   }
-  const [state, dispatch] = useReducer(reducer,{cart:cart})
+
+  const [state, dispatch] = useReducer(reducer,data)
   
   return (
     <div>
       <CartContext.Provider value={{state, dispatch}}>
         <BrowserRouter>
         <Header />
+        <ScrollToTop/>
         <Suspense fallback={null}>
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/category/:category" element={<Category/>}/>
                 <Route path="/search" element={<Search/>}/>
                 <Route path="/product/:id/:title" element={<ProductDetails/>}/>
+
+                <Route path="/auth/login" element={<Login/>}/>
             </Routes>
         </Suspense>
         </BrowserRouter>

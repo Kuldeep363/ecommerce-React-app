@@ -1,5 +1,6 @@
 import React from 'react'
-import { CartState } from '../../App'
+import { CartState } from '../../App';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 function CartProduct({id, title, price, img, quantity}) {
 
@@ -34,7 +35,7 @@ function CartProduct({id, title, price, img, quantity}) {
                     quantity>1?
                     <div className="quantity__btn" onClick={()=>changeQuantity(quantity-1)} >-</div>
                     :
-                    <div className="quantity__btn remove" onClick={()=>removeProduct()}>-</div>
+                    <div className="quantity__btn remove" onClick={()=>removeProduct()}><DeleteOutlineOutlinedIcon/></div>
                 }
                 <small>{quantity}</small>
                 <div className="quantity__btn" onClick={()=>changeQuantity(quantity+1)} >+</div>
@@ -43,7 +44,7 @@ function CartProduct({id, title, price, img, quantity}) {
         {
             quantity>1?
                 <div className="remove__btn remove" onClick={()=>removeProduct()}>
-                    -
+                    <DeleteOutlineOutlinedIcon/>
                 </div>
                 :
                 null

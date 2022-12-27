@@ -2,38 +2,52 @@ import React, { useEffect, useState } from 'react'
 import { CartState } from '../../App';
 import CartProduct from './cartProduct'
 import EmptyCart from './emptyCart'
+import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartCheckoutRounded';
+import { display } from '@mui/system';
 
 function Cart({showCart}) {
     const [subTotal, setSubTotal] = useState(0);
     const [tax, setTax] = useState(0);
     const [deliveryCharges, setDeliveryCharges] = useState(0);
+    const [total, setTotal] = useState(0);
 
-    const {state} = CartState()
+    const {state,dispatch} = CartState()
     useEffect(()=>{
-        let cost = state.cart.reduce((prev, curr)=>{
+        let cost = state.cart.products.reduce((prev, curr)=>{
             prev += curr.price *curr.quantity
             return prev
         },0)
         setSubTotal(cost)
 
         setTax(Math.ceil(0.18*cost))
-        if(cost<500){
-            setDeliveryCharges(40)
+        cost += Math.ceil(0.18*cost)
+        let chargesDel = 40;
+        if(cost>0 && cost<500){
+            chargesDel = 40
         }else{
-            setDeliveryCharges(0)
+            chargesDel = 0
         }
-    },[state])
+        setDeliveryCharges(chargesDel)
+        const total = cost + chargesDel
+        setTotal(total)
+        dispatch({
+            type:'SET_TOTAL',
+            payload:{
+                price: total
+            }
+        })
+    },[state.cart.products])
   return (
     <div id='cart' style={{right:showCart?'0':'-100vw'}}>
         <h3>Your Cart</h3>
         <div id="cart__items">
             {
-                state.cart.length===0?
+                state.cart.products.length===0?
                 <EmptyCart/>
                 :
                 <div className="cart__products">
                     {
-                        state.cart.map((product)=>{
+                        state.cart.products.map((product)=>{
                             return (
                                 <CartProduct key={product.id} id={product.id}  title={product.title} img={product.img} price={product.price} quantity={product.quantity} />
                             )
@@ -56,7 +70,7 @@ function Cart({showCart}) {
                                 <br />
                                 {
                                     deliveryCharges!==0?
-                                    <small className='very__small green'>(Add ${500-subTotal} items to avail free delivery)</small>
+                                    <small className='very__small green'>(Add ${500-(total-deliveryCharges)} items to avail free delivery)</small>
                                     :null
                                 }
                             </div>
@@ -92,11 +106,17 @@ function Cart({showCart}) {
                             </div>
                             <div>
                                 <b>
-                                    ${subTotal+deliveryCharges+tax}
+                                    ${total}
                                 </b>
                             </div>
                         </div>
 
+                    </div>
+                    <div className="checkout__btn">
+                        <div className="add__to__cart">
+                            <ShoppingCartCheckoutRoundedIcon/>
+                            Proceed to checkout
+                        </div>
                     </div>
                 </div>
             }

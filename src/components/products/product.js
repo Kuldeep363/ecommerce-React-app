@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { CartState } from "../../App";
+import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
+import RemoveShoppingCartOutlinedIcon from '@mui/icons-material/RemoveShoppingCartOutlined';
+import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded';
 
 const Product = ({id, title, img, price, rating }) => {
   
@@ -39,32 +42,36 @@ const Product = ({id, title, img, price, rating }) => {
       <div className="product__img">
         <img src={img} alt={title} />
       </div>
-      {/* {
-        recommended?
-        null
-        :
-        <> */}
         <div className="product__data">
           <div className='d-flex justify-between'>
-            <h3>{title}</h3>
-            <p>⭐{(Math.round((rating*10))/10).toFixed(1)}</p>
-          </div> <br />
+            <h5>{title}</h5>
+            <small className="product__rating">
+              <StarRateRoundedIcon/>
+              <span>
+                {(Math.round((rating*10))/10).toFixed(1)}
+              </span>
+            </small>
+          </div> 
             <p>${price}</p>
         </div>
         <div className="product__data">
           {
-            state.cart.some(product=>product.id===id)?
+            state.cart.products.some(product=>product.id===id)?
               <div className="remove__from__cart" onClick={(e)=>removeFromCart(e)}>
-                Remove from cart
+                <RemoveShoppingCartOutlinedIcon/>
+                <span>
+                  Remove from cart
+                </span>
               </div>
             :
             <div className="add__to__cart" onClick={(e)=>addToCart(e)}>
-              Add to cart
+              <AddShoppingCartOutlinedIcon/>
+              <span>
+                Add to cart
+              </span>
             </div>
           }
         </div>
-        {/* </>
-      } */}
     </div>
   );
 };

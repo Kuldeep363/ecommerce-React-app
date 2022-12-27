@@ -1,12 +1,17 @@
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CartState } from "../../App";
-import Logo from '../../assets/images/kr-logo.png';
+import Logo from '../../assets/images/logo.webp';
+import DeleteDialog from '../extraComponents/DeleteDialog';
 const Cart = lazy(()=>import("../cart/cart"));
 
 const Header = () => {
   const [numberOfCartItems, setNumbeOfCartItems] = useState(0)
   const [showCart, setShowCart] = useState(false)
+  const [dialog, setShowDialog] = useState(false)
 
   const categories = [
     "Smartphones",
@@ -26,21 +31,26 @@ const Header = () => {
   ]
 
   const {state} = CartState();
-  // let count = 
+
+  const toggleDialog = ()=>{
+    setShowDialog(!dialog)
+  }
+  
   useEffect(()=>{
-    setNumbeOfCartItems(state.cart.length)
+    setNumbeOfCartItems(state.cart.products.length)
   },[state.cart])
   return ( 
     <div className="d-flex justify-between" id="header">
       <div className="d-flex" id="nav__icons">
         <div className="logo">
           <Link to='/'>
-            <img src={Logo} alt="Kuldeep Rawat" />
+            <img src={Logo} alt="Kuldeep Rawat" width='40px' />
           </Link>
         </div>
         <div className="navbar__links">
             <div id="categ">
-              <div >Categories</div>
+              <div>Categories</div>
+              <KeyboardArrowDownRoundedIcon/>
               <div id="categories__link">
                 {
                   categories.map((c,i)=>{
@@ -52,20 +62,35 @@ const Header = () => {
               </div>
             </div>
             <div>
-              <Link to='/search'>Search</Link>
+              <Link to='/search'><SearchRoundedIcon/></Link>
             </div>
         </div>
       </div>
-      <div className="cart__icon" id='cart__icon' onClick={()=>setShowCart(!showCart)}>
-        <span role='img' aria-label='icon'>🛒</span>
-        {
-          state.cart.length>0 &&
-        <p className="cart__items__number">{numberOfCartItems}</p>
-        }
+      <div className="d-flex" style={{'alignItems':'center','gap':'15px'}}>
+        <div className='auth__btns'>
+          {
+            state.user?
+            <div className='logout__btn' onClick={()=>toggleDialog()}>Logout</div>
+            :
+            <Link to='/auth/login' className='login__btn'>Login</Link>
+          }
+        </div> 
+        <div className="cart__icon" id='cart__icon' onClick={()=>setShowCart(!showCart)}>
+          <ShoppingCartOutlinedIcon />
+          {
+            state.cart.products.length>0 &&
+          <p className="cart__items__number">{numberOfCartItems}</p>
+          }
+        </div>
       </div>
       <Suspense>
         <Cart showCart={showCart} />
       </Suspense>
+      {
+        dialog &&
+        <DeleteDialog toggleDialog={toggleDialog}/>
+
+      }
     </div>
   );
 };

@@ -1,44 +1,58 @@
 const reducer = (state,action)=>{
-    let cart;
+    let data;
     switch (action.type){
         case "ADD_TO_CART":
-            cart = {cart:[...state.cart,{...action.payload}]}
-            localStorage.setItem('cart',JSON.stringify(cart))
-            return cart
+            if(navigator.vibrate){
+                navigator.vibrate(75)
+            }
+            data = {...state,cart:{...state.cart,products:[...state.cart.products,{...action.payload}]}}
+            localStorage.setItem('data',JSON.stringify(data))
+            return data
             
         case "REMOVE_FROM_CART":
-            cart = {cart:[...state.cart.filter(product=>product.id!==action.payload.id)]}
-            localStorage.setItem('cart',JSON.stringify(cart))
-            return cart
-            
-        case 'REMOVE_ONE':
-            cart = {
-                cart:
-                [
-                    ...state.cart.map((product)=>{
-                        if(product.id === action.payload.id){
-                            product.quantity -=1
-                        }
-                        return product
-                    })
-                ]
-            }
-            localStorage.setItem('cart',JSON.stringify(cart))
-            return cart
+            data = {...state,cart:{...state.cart, products:[...state.cart.products.filter(product=>product.id!==action.payload.id)]}}
+            localStorage.setItem('data',JSON.stringify(data))
+            return data
 
         case 'CHANGE_QUANTITY':
-            cart = {
-                cart:[
-                    ...state.cart.filter((product)=>(
+            data = {...state,
+                cart:{
+                    ...state.cart,
+                    products:[...state.cart.products.filter((product)=>(
                         product.id === action.payload.id?
                             product.quantity = action.payload.quantity
                             :product.quantity
                         
-                    ))
-                ]
+                    ))]
+                }
             }
-            localStorage.setItem('cart',JSON.stringify(cart))
-            return cart
+            localStorage.setItem('data',JSON.stringify(data))
+            return data
+            
+        case 'SET_TOTAL':
+            data={...state,
+                cart:{
+                    ...state.cart,
+                    totalPrice: action.payload.price
+                }
+            }
+            localStorage.setItem('data',JSON.stringify(data))
+            return data
+            
+        case 'LOGIN':
+            data = {
+                ...state,
+                user:{...action.payload}
+            }
+            localStorage.setItem('data',JSON.stringify(data))
+            return data
+        case 'LOGOUT':
+            data = {
+                ...state,
+                user:null
+            }
+            localStorage.setItem('data',JSON.stringify(data))
+            return data
 
         default:
             return state

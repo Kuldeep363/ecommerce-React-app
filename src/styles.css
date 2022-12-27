@@ -7,6 +7,10 @@
 :root{
   --primary__color:#0590ec;
 }
+@font-face {
+  font-family: 'Emporium';
+  src: url('./assets/images/kuldeep.ttf');
+}
 
 /* html{
   overflow-x: hidden;
@@ -14,10 +18,11 @@
 #top {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow-x: hidden;
+  font-family: 'Emporium';
 }
 
-h2{
-  padding: 20px;
+#recommended__products__data h3, #product__listing h3,.login h3{
+  padding: 10px 0;
 }
 a{
   text-decoration: none;
@@ -38,6 +43,12 @@ a{
 .pagination__btns {
   cursor: pointer;
   margin: 10px;
+  display: flex;
+  background-color: var(--primary__color);
+  border-radius: 3px;
+}
+.pagination__btns svg{
+  color: #fefefe;
 }
 .pagination__tab {
   width: 25px;
@@ -61,12 +72,16 @@ a{
 }
 .d-flex {
   display: flex;
+  gap: 2px;
 }
 .justify-between {
   justify-content: space-between;
 }
 .justify-center {
   justify-content: center;
+}
+.align-center{
+  align-items: center;
 }
 .product {
   background-color: #fefefe;
@@ -89,7 +104,10 @@ a{
   gap: 20px;
 }
 .add__to__cart,.remove__from__cart,button{
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
   color: #fefefe;
   width: 100%;
   text-align: center;
@@ -109,15 +127,17 @@ a{
 }
 
 #header{
-  padding: 15px 10px;
+  padding: 5px 10px;
   position: fixed;
   width: 100%;
   top: 0;
-  background-color: #ffffff39;
+  background-color: #ffffffa8;
   backdrop-filter: blur(10px);
 }
 #categ{
   position: relative;
+  display: flex;
+  align-items: center;
 }
 #categories__link{
   position: fixed;
@@ -129,9 +149,16 @@ a{
   background-color: #fefefe;
   overflow: hidden;
   height: 0;
+  top: 40px;
 }
 #categ:hover #categories__link{
   height: unset;
+}
+svg{
+  transition: 0.3s all ease-in-out!important;
+}
+#categ:hover svg{
+  transform: rotate(180deg);
 }
 #categories__link a{
   padding: 10px;
@@ -152,12 +179,14 @@ a{
   right: 0;
   font-size: 8px;
   background-color: var(--primary__color);
-  width: 12px;
-  height: 12px;
-  line-height: 12px;
+  width: 15px;
+  height: 15px;
+  line-height: 7px;
   border-radius: 50%;
   text-align: center;
   color: #fefefe;
+  border: 1px solid #fefefe;
+  padding: 4px;
 }
 #nav__icons{
   min-width: 50%;
@@ -174,9 +203,6 @@ a{
 .navbar__links{
   display: flex;
   gap: 15px;
-}
-.logo img{
-  width: 20px;
 }
 #cart{
   position: fixed;
@@ -259,10 +285,14 @@ a{
   background-color: #d80303;
   color: #fefefe;
 }
+.remove svg{
+  font-size: 14px;
+}
 .remove__btn{
   position: absolute;
-  top: 3px;
-  right: 3px;
+  bottom: 0;
+  right: 0;
+  border-radius: 5px 0 5px 0;
 }
 .cart__calculation{
   background-color: #fefefe;
@@ -288,8 +318,7 @@ a{
 }
 #cart__items{
   height: 85vh;
-  overflow-y: scroll;
-  overflow-x: visible;
+  overflow: visible scroll;
 }
 #cart__items::-webkit-scrollbar{
   display: none;
@@ -323,15 +352,15 @@ a{
   height: 100%;
   object-fit: cover;
 }
-.search__form{
+.search__form, #login__form{
   width: 100%;
 }
-.search__form form{
+form{
   width: 100%;
   padding: 20px 0;
   text-align: center;
 }
-.search__form form input{
+form input{
   width: 100%;
   background-color: #fefefe;
   border-radius: 5px;
@@ -341,9 +370,31 @@ a{
   border: none;
   outline: none;
 }
-.search__form form button{
+form button{
   outline: none;
   border: none;
+}
+.login__h3{
+  text-align: center;
+}
+#login__form form{
+  padding: 10px 0;
+}
+#login__form form input{
+  padding-left: 35px;
+  margin: 15px 0;
+}
+#login__form  .form-group{
+  position: relative;
+  margin: auto;
+  /* z-index: -1; */
+}
+#login__form  .form-group svg{
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary__color);
 }
 #no__product{
   display: flex;
@@ -402,11 +453,12 @@ a{
   margin-left: 10px;
 }
 .product__rating, .product__brand{
-  font-size: 14px;
   padding: 2px 5px;
   border-radius: 5px;
-  background-color: #f9f9bf;
+  background-color: #fcfcd7;
   margin-left: 10px;
+  display: inline-flex;
+  height: fit-content;
 }
 .product__brand{
   background-color: #0383d8;
@@ -440,19 +492,69 @@ a{
 #recommended__products .product{
   width: 300px;
 }
+.product__rating svg{
+  font-size: 18px;
+  color: rgb(250, 175, 0);
+}
+.logout__btn,.login__btn{
+  background-color: #fa0202;
+  color: #fefefe;
+  padding: 3px 7px;
+  border-radius: 3px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.login__btn{
+  background-color: var(--primary__color);
+}
+.logo img{
+  width: 30px;
+}
+#delete__dialog{
+  position: fixed;
+  max-width: 100vw;
+  min-width: 100vw;
+  min-height: 100vh;
+  max-height: 100vh;
+  background-color: #252525f5;
+  top: 0;
+  left: 0;
+}
+#delete__dialog .wrapper{
+  padding: 35px;
+  background-color: #fefefe;
+  border-radius: 10px;
+}
+#delete__dialog h3{
+  margin: 10px 0;
+}
+#delete__dialog button{
+  outline: none;
+  border: none;
+}
+
+
+
+
+
+
+
 
 
 
 
 
 @media (min-width: 554px) {
+  .logo img{
+    width: 40px;
+  }
   .product__listing {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   #cart{
     width: 50vw;
   }
-  .search__form{
+  .search__form, #login__form{
     width: 70%;
   }
 }
@@ -463,7 +565,7 @@ a{
   #cart{
     width: 30vw;
   }
-  .search__form{
+  .search__form, #login__form{
     width: 50%;
   }
   #product__data{
