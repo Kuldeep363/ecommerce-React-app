@@ -3,13 +3,17 @@ import { CartState } from '../../App';
 import CartProduct from './cartProduct'
 import EmptyCart from './emptyCart'
 import ShoppingCartCheckoutRoundedIcon from '@mui/icons-material/ShoppingCartCheckoutRounded';
-import { display } from '@mui/system';
+import { Link } from 'react-router-dom';
 
 function Cart({showCart}) {
     const [subTotal, setSubTotal] = useState(0);
     const [tax, setTax] = useState(0);
     const [deliveryCharges, setDeliveryCharges] = useState(0);
     const [total, setTotal] = useState(0);
+
+    const closeCart = ()=>{
+        document.getElementById('cart__icon').click()
+    }
 
     const {state,dispatch} = CartState()
     useEffect(()=>{
@@ -113,10 +117,12 @@ function Cart({showCart}) {
 
                     </div>
                     <div className="checkout__btn">
-                        <div className="add__to__cart">
-                            <ShoppingCartCheckoutRoundedIcon/>
-                            Proceed to checkout
-                        </div>
+                        <Link to='/checkout' onClick={()=>closeCart()}>
+                            <div className="add__to__cart">
+                                <ShoppingCartCheckoutRoundedIcon/>
+                                Proceed to checkout
+                            </div>
+                        </Link>
                     </div>
                 </div>
             }

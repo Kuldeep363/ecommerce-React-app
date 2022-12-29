@@ -6,6 +6,7 @@ import "./styles.css";
 import reducer from "./store/reducer";
 import Login from "./pages/Login";
 import UserAccount from "./pages/UserAccount";
+import CheckoutPage from "./pages/CheckoutPage";
 const Home = lazy(()=>import("./pages/Home"));
 const Category = lazy(()=>import("./pages/Category"));
 const Search = lazy(()=> import("./pages/Search"));
@@ -48,6 +49,7 @@ export default function App() {
 
                 <Route path="/auth/login" element={<Login/>}/>
                 <Route path="/user" element={<UserAccount/>}/>
+                <Route path="/checkout" element={<CheckoutPage/>}/>
             </Routes>
         </Suspense>
         </BrowserRouter>

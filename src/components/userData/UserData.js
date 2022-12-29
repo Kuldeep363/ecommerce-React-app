@@ -1,9 +1,9 @@
-import React, { lazy } from 'react'
+import React from 'react'
 import { CartState } from '../../App'
 import UserAvatar from '../../assets/images/user.jpg';
 
 const UserData = () => {
-    const {state:{user:user}} = CartState();
+    const {state:{user}} = CartState();
   return (
     <div className='text__center'>
         <div className="user__img">

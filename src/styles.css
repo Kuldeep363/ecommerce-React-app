@@ -268,12 +268,13 @@ svg{
 .quantity__btn,.remove__btn{
   width: 20px;
   height: 20px;
-  text-align: center;
-  line-height: 20px;
   background-color: #0383d8;
   color: #fefefe;
   border-radius: 3px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .quantity__btn__product{
   width: 65px;
@@ -407,7 +408,7 @@ form button{
   align-items: center;
 }
 #no__product img{
-  width: 80%;
+  width: 50%;
 }
 #product__data{
   display: grid;
@@ -563,6 +564,59 @@ form button{
   border-radius: 50%;
   background-color: #dfdfdf;
   border: 2px solid var(--primary__color);
+}
+#checkout__heading{
+  padding: 10px 0;
+}
+.border__bottom{
+  border-bottom: 1px solid #dfdfdf;
+}
+#user__details{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+.user__address{
+  padding: 10px;
+  background-color: #dcf1ff;
+  border-radius: 10px;
+}
+.address__btns, #user__addresses{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin:  auto 0;
+}
+.user__addresses{
+  transition: unset;
+}
+#user__addresses input{
+  display: none;
+}
+.address__input:checked + .user__address{
+  background-color: var(--primary__color);
+  color: #fefefe;
+}
+.address__input:checked + .user__address .edit{
+  background-color: #fefefe;
+  color: var(--primary__color);
+}
+#proceed__to__payment{
+  width: 100%;
+}
+#checkout__page{
+  height: 85vh;
+}
+#checkout__user__data{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#checkout__user__data > div{
+  width: 100%;
 }
 
 
