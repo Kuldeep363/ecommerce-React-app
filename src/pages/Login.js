@@ -1,12 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router';
-import { CartState } from '../App';
 import LoginForm from '../components/login/loginForm';
+import Auth from '../store/Authenticate';
 
 const Login = () => {
-    const {state} = CartState();
+    const isAuthenticated = Auth()
     const navigation = useNavigate();
-    if(state.user){
+    if(isAuthenticated){
         navigation('/')
     }else{
   return (

@@ -352,8 +352,11 @@ svg{
   height: 100%;
   object-fit: cover;
 }
-.search__form, #login__form{
+.search__form, #login__form,.myContainer{
   width: 100%;
+}
+.text__center{
+  text-align: center;
 }
 form{
   width: 100%;
@@ -500,11 +503,11 @@ form button{
   background-color: #fa0202;
   color: #fefefe;
   padding: 3px 7px;
-  border-radius: 3px;
   font-size: 14px;
   cursor: pointer;
 }
 .login__btn{
+  border-radius: 3px;
   background-color: var(--primary__color);
 }
 .logo img{
@@ -532,9 +535,35 @@ form button{
   outline: none;
   border: none;
 }
-
-
-
+#user__header{
+  position: relative;
+}
+#user__header img{
+  border-radius: 50%;
+  background-color: #dfdfdf;
+}
+#account__actions{
+  position: absolute;
+  right: 0;
+  overflow: hidden;
+  border-radius: 3px;
+  background-color: #fefefe;
+  height: 0px;
+}
+#account__actions div{
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  gap:3px;
+}
+#user__header:hover #account__actions{
+  height: unset;
+}
+.user__img img{
+  border-radius: 50%;
+  background-color: #dfdfdf;
+  border: 2px solid var(--primary__color);
+}
 
 
 
@@ -554,7 +583,7 @@ form button{
   #cart{
     width: 50vw;
   }
-  .search__form, #login__form{
+  .search__form, #login__form, .myContainer{
     width: 70%;
   }
 }
@@ -565,7 +594,7 @@ form button{
   #cart{
     width: 30vw;
   }
-  .search__form, #login__form{
+  .search__form, #login__form, .myContainer{
     width: 50%;
   }
   #product__data{

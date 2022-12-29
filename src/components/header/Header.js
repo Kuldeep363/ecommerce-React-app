@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import { CartState } from "../../App";
 import Logo from '../../assets/images/logo.webp';
 import DeleteDialog from '../extraComponents/DeleteDialog';
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import UserAvatar from '../../assets/images/user.jpg';
 const Cart = lazy(()=>import("../cart/cart"));
 
 const Header = () => {
@@ -70,7 +73,23 @@ const Header = () => {
         <div className='auth__btns'>
           {
             state.user?
-            <div className='logout__btn' onClick={()=>toggleDialog()}>Logout</div>
+            <div id='user__header'>
+              <img src={state.user.image!==''?state.user.image:UserAvatar} alt='User avatar' width='30px' height='30px' />
+              <div id="account__actions">
+                <Link to='/user'>
+                  <div>
+                      <AccountBoxIcon fontSize='smaller'/>
+                      <p>
+                        Account
+                      </p>
+                  </div>
+                </Link>
+                <div className='logout__btn' onClick={()=>toggleDialog()}>
+                  <LogoutIcon fontSize='smaller'/>
+                  <p>Logout</p>
+                </div>
+              </div>
+            </div>
             :
             <Link to='/auth/login' className='login__btn'>Login</Link>
           }

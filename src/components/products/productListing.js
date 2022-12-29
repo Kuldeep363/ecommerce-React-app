@@ -2,7 +2,6 @@ import NavigateBeforeRoundedIcon from '@mui/icons-material/NavigateBeforeRounded
 import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
 import { lazy, Suspense, useEffect, useState } from "react";
 import Loading from "../extraComponents/Loading";
-import ScrollToTop from '../extraComponents/ScrollToTop';
 const NoProducts = lazy(()=> import("../extraComponents/NoProducts"))      ;
 const Product  = lazy(()=>import('./product'))
 
@@ -21,6 +20,7 @@ const ProductListing = () => {
       setProducts(data.products);
       setTotalPages(data.total/10)
       setLoading(false)
+      window.scrollTo(0,150)
     }
   };
 
@@ -32,7 +32,6 @@ const ProductListing = () => {
 // console.log(products)
   useEffect(()=>{
     fetchProducts();
-    window.scrollTo(0,0)
   },[page])
 
   return (

@@ -14,7 +14,6 @@ const LoginForm = () => {
     }
 
     const login = async()=>{
-        console.log(1)
         const res = await fetch('https://dummyjson.com/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -35,7 +34,6 @@ const LoginForm = () => {
     const handleSubmit = (e)=>{
         setBtnTxt('Checking credentials...')
         e.preventDefault();
-        console.log(1)
         login()
 
     }

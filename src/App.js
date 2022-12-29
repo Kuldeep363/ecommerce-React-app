@@ -5,6 +5,7 @@ import { createContext, lazy, Suspense, useContext, useReducer } from "react";
 import "./styles.css";
 import reducer from "./store/reducer";
 import Login from "./pages/Login";
+import UserAccount from "./pages/UserAccount";
 const Home = lazy(()=>import("./pages/Home"));
 const Category = lazy(()=>import("./pages/Category"));
 const Search = lazy(()=> import("./pages/Search"));
@@ -46,6 +47,7 @@ export default function App() {
                 <Route path="/product/:id/:title" element={<ProductDetails/>}/>
 
                 <Route path="/auth/login" element={<Login/>}/>
+                <Route path="/user" element={<UserAccount/>}/>
             </Routes>
         </Suspense>
         </BrowserRouter>
