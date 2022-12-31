@@ -13,6 +13,11 @@ const reducer = (state,action)=>{
             data = {...state,cart:{...state.cart, products:[...state.cart.products.filter(product=>product.id!==action.payload.id)]}}
             localStorage.setItem('data',JSON.stringify(data))
             return data
+            
+        case "EMPTY_CART":
+            data={...state,cart:{products:[],totalPrice:0}}
+            localStorage.setItem('data',JSON.stringify(data))
+            return data
 
         case 'CHANGE_QUANTITY':
             data = {...state,

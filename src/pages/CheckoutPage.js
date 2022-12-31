@@ -21,9 +21,12 @@ const CheckoutPage = () => {
                 </>
             )
             :
-            <div className="d-flex justify-center">
-                <LoginForm/>
-            </div>
+            <>
+                <h3 className="text__center">Login to check out</h3>
+                <div className="d-flex justify-center">
+                    <LoginForm/>
+                </div>
+            </>
         }
     </div>
   )

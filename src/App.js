@@ -38,7 +38,6 @@ export default function App() {
     <div>
       <CartContext.Provider value={{state, dispatch}}>
         <BrowserRouter>
-        <Header />
         <ScrollToTop/>
         <Suspense fallback={null}>
             <Routes>
@@ -52,6 +51,7 @@ export default function App() {
                 <Route path="/checkout" element={<CheckoutPage/>}/>
             </Routes>
         </Suspense>
+        <Header />
         </BrowserRouter>
       </CartContext.Provider>
     </div>

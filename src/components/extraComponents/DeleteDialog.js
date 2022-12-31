@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react';
 import { CartState } from '../../App';
 
 const DeleteDialog = ({toggleDialog}) => {
-    const [show, setShow] = useState(false);
     const {dispatch} = CartState();
 
     const closeDialog = (e)=>{
         e.stopPropagation()
-        if(e.target.id === 'delete__dialog' || e.target.id === 'cancel__btn'){
+        if(e.target.id === 'dialog' || e.target.id === 'cancel__btn'){
             toggleDialog()
         }
     }
@@ -21,7 +20,7 @@ const DeleteDialog = ({toggleDialog}) => {
       }
 
   return (
-    <div className='d-flex justify-center align-center' id='delete__dialog' onClick={(e)=>closeDialog(e)}>
+    <div className='d-flex justify-center align-center delete__dialog' id='dialog' onClick={(e)=>closeDialog(e)}>
         <div className="wrapper">
             <h3>Do you really want to logout?</h3>
             <div className="d-flex">
