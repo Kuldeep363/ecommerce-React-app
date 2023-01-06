@@ -642,6 +642,22 @@ form button{
 .delete__dialog.action{
   pointer-events: none;
 }
+.Toastify button{
+  width: unset;
+}
+#footer{
+  display: grid;
+  place-items: center;
+  background-color: var(--primary__color);
+  color: #fefefe;
+  padding: 5px;
+  font-size: 12px;
+}
+#footer a{
+  color: #fefefe;
+  margin-left: 3px;
+  text-decoration: underline;
+}
 
 
 

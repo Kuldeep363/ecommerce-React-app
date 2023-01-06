@@ -1,5 +1,6 @@
 import React from 'react';
 import { CartState } from '../../App';
+import Modal from './Modal';
 
 const DeleteDialog = ({toggleDialog}) => {
     const {dispatch} = CartState();
@@ -18,17 +19,21 @@ const DeleteDialog = ({toggleDialog}) => {
         })
         toggleDialog()
       }
+    
+    
 
   return (
-    <div className='d-flex justify-center align-center delete__dialog' id='dialog' onClick={(e)=>closeDialog(e)}>
-        <div className="wrapper">
-            <h3>Do you really want to logout?</h3>
-            <div className="d-flex">
-                <button id='cancel__btn'>Cancel</button>
-                <button className='remove' onClick={(e)=>logout(e)}>Logout</button>
+    <Modal>
+        <div className='d-flex justify-center align-center delete__dialog' id='dialog' onClick={(e)=>closeDialog(e)}>
+            <div className="wrapper">
+                <h3>Do you really want to logout?</h3>
+                <div className="d-flex">
+                    <button id='cancel__btn'>Cancel</button>
+                    <button className='remove' onClick={(e)=>logout(e)}>Logout</button>
+                </div>
             </div>
         </div>
-    </div>
+    </Modal>
   )
 }
 

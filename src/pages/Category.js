@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import Loading from '../components/extraComponents/Loading';
+import Footer from '../components/footer/Footer';
 const NoProducts = lazy(()=>import('../components/extraComponents/NoProducts'));
 const Product = lazy(()=>import('../components/products/product'));
 
@@ -22,7 +23,8 @@ const Category = () => {
         fetchProducts();
     },[category])
   return (
-    <Suspense>
+    <>
+      <Suspense>
       <div id='product__listing' className='mt padding'>
         <h3>{category}</h3>
         {
@@ -44,6 +46,8 @@ const Category = () => {
         }
       </div>
     </Suspense>
+    <Footer/>
+    </>
   )
 }
 

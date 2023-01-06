@@ -8,6 +8,8 @@ import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
 import ReportRoundedIcon from '@mui/icons-material/ReportRounded';
 import LaunchRoundedIcon from '@mui/icons-material/LaunchRounded';
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
+import { toast} from 'react-toastify';
+
 
 const ProductDetailsData = ({data}) => {
     const [activeImg, setActiveImg] = useState(null)
@@ -45,6 +47,8 @@ const ProductDetailsData = ({data}) => {
         quantity:1
       }
     })
+    
+    toast.success('Added to cart')
   }
   const removeFromCart = ()=>{
     setQuantity(0)
@@ -54,6 +58,7 @@ const ProductDetailsData = ({data}) => {
         id:data.id
       }
     })
+    toast.error('Removed from cart')
   }
   const changeQuantity = (value)=>{
     setQuantity(value)

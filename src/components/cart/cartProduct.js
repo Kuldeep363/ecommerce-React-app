@@ -1,6 +1,7 @@
 import React from 'react'
 import { CartState } from '../../App';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import { toast} from 'react-toastify';
 
 function CartProduct({id, title, price, img, quantity}) {
 
@@ -21,6 +22,7 @@ function CartProduct({id, title, price, img, quantity}) {
                 id
             }
         })
+        toast.error('Removed from cart')
     }
   return (
     <div className='cart__product'>

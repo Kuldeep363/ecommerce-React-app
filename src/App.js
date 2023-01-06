@@ -7,12 +7,15 @@ import reducer from "./store/reducer";
 import Login from "./pages/Login";
 import UserAccount from "./pages/UserAccount";
 import CheckoutPage from "./pages/CheckoutPage";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 const Home = lazy(()=>import("./pages/Home"));
 const Category = lazy(()=>import("./pages/Category"));
 const Search = lazy(()=> import("./pages/Search"));
 const ProductDetails = lazy(()=> import("./components/products/productDetails"));
 
 let CartContext = createContext();
+
 
 export default function App() {
 
@@ -39,6 +42,19 @@ export default function App() {
       <CartContext.Provider value={{state, dispatch}}>
         <BrowserRouter>
         <ScrollToTop/>
+        <Header />
+        <ToastContainer 
+        position="bottom-center"
+        autoClose={700}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+        theme="colored"
+        />
         <Suspense fallback={null}>
             <Routes>
                 <Route path="/" element={<Home/>}/>
@@ -51,7 +67,6 @@ export default function App() {
                 <Route path="/checkout" element={<CheckoutPage/>}/>
             </Routes>
         </Suspense>
-        <Header />
         </BrowserRouter>
       </CartContext.Provider>
     </div>
